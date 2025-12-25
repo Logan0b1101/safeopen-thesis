@@ -1,0 +1,44 @@
+[2025-10-26 19:08:59] SANDBOX START: /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-10-26 19:08:59] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-10-26 19:08:59] SANDBOX END: /home/kali/thesis/~safeopen/test_malicious.docm (exit OK)
+
+[2025-10-26 19:10:00] SANDBOX START: /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-10-26 19:10:00] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-10-26 19:10:00] SANDBOX END: /home/kali/thesis/~safeopen/test_malicious.docm (exit OK)
+
+[2025-11-25 13:31:22] SANDBOX START: /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 13:31:22] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 13:31:22] SANDBOX END: /home/kali/thesis/~safeopen/test_malicious.docm (exit OK)
+
+[2025-11-25 14:31:22] SANDBOX START: /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:31:22] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:31:22] SANDBOX END: /home/kali/thesis/~safeopen/test_malicious.docm (exit OK)
+
+[2025-11-25 14:32:05] SANDBOX START: /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:32:05] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:32:05] ERROR: TimeoutExpired after 60s for /home/kali/thesis/~safeopen/test_malicious.docm
+
+[2025-11-25 14:33:35] SANDBOX START: /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:33:35] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:33:35] SANDBOX END: /home/kali/thesis/~safeopen/test_malicious.docm (exit OK)
+
+[2025-11-25 14:35:32] SANDBOX START: /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:35:32] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:35:32] ERROR: TimeoutExpired after 60s for /home/kali/thesis/~safeopen/test_malicious.docm
+
+[2025-11-25 14:40:57] SANDBOX START: /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:40:57] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:40:57] SANDBOX END: /home/kali/thesis/~safeopen/test_malicious.docm (exit OK)
+
+[2025-11-25 14:41:13] SANDBOX START: /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:41:13] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:41:13] ERROR: TimeoutExpired after 60s for /home/kali/thesis/~safeopen/test_malicious.docm
+
+[2025-11-25 14:42:34] SANDBOX START: /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:42:34] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:42:34] SANDBOX END: /home/kali/thesis/~safeopen/test_malicious.docm (exit OK)
+
+[2025-11-25 14:46:24] SANDBOX START: /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:46:24] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/thesis/~safeopen/test_malicious.docm
+[2025-11-25 14:46:24] SANDBOX END: /home/kali/thesis/~safeopen/test_malicious.docm (exit OK)
+

@@ -1,0 +1,27 @@
+filename,ground_truth,static_label,ml_probability,final_score,final_label,action,latency_sec,static_reason
+test.docx,BENIGN,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.0088,Extension/MIME mismatch: inode/x-empty
+config.json,BENIGN,LOW,0.4123632280442441,0.2649452912176976,LOW,NONE,0.0083,No issues detected
+your_resume.pdf,BENIGN,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.0082,PDF file (possible embedded scripts); Extension/MIME mismatch: inode/x-empty
+resume.pdf,BENIGN,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.0119,PDF file (possible embedded scripts); Extension/MIME mismatch: text/plain
+clean_report.pdf,BENIGN,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.0093,PDF file (possible embedded scripts)
+test.pdf,BENIGN,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.0082,PDF file (possible embedded scripts); Extension/MIME mismatch: inode/x-empty
+project_notes.docx,BENIGN,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.009,Extension/MIME mismatch: text/plain
+notes.txt,BENIGN,LOW,0.4123632280442441,0.2649452912176976,LOW,NONE,0.0088,No issues detected
+documents.zip,BENIGN,LOW,0.4123632280442441,0.2649452912176976,LOW,NONE,0.0116,No issues detected
+multipage_clean.pdf,BENIGN,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.0096,PDF file (possible embedded scripts)
+photo.jpg,BENIGN,LOW,0.4123632280442441,0.2649452912176976,LOW,NONE,0.0085,No issues detected
+manifest.json,BENIGN,LOW,0.4123632280442441,0.2649452912176976,LOW,NONE,0.0088,No issues detected
+blank.pdf,BENIGN,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.0086,PDF file (possible embedded scripts); Extension/MIME mismatch: inode/x-empty
+test.txt,BENIGN,LOW,0.4123632280442441,0.2649452912176976,LOW,NONE,0.0107,No issues detected
+js_valid_embedded.pdf,MALICIOUS,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.0103,PDF file (possible embedded scripts)
+macro_test.docm,MALICIOUS,HIGH,0.4123632280442441,0.6149452912176976,MEDIUM,CDR,0.0107,Macro-enabled Office file; Matched YARA: Detect_Macro
+js_embedded.pdf,MALICIOUS,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.0084,PDF file (possible embedded scripts)
+phishing_invoice.pdf,MALICIOUS,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.0089,PDF file (possible embedded scripts); Extension/MIME mismatch: text/plain
+text_as_pdf.pdf,MALICIOUS,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.0091,PDF file (possible embedded scripts); Extension/MIME mismatch: text/plain
+suspicious_nested.zip,MALICIOUS,LOW,0.4123632280442441,0.2649452912176976,LOW,NONE,0.0101,No issues detected
+openaction_trigger.pdf,MALICIOUS,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.0093,PDF file (possible embedded scripts)
+mismatched_pdf_as_jpg.jpg,MALICIOUS,LOW,0.4123632280442441,0.2649452912176976,LOW,NONE,0.0084,No issues detected
+js_embedded_simplified.pdf,MALICIOUS,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.0084,PDF file (possible embedded scripts)
+polyglot_pdf_zip.pdf,MALICIOUS,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.0083,PDF file (possible embedded scripts)
+js_valid_embedded_final.pdf,MALICIOUS,MEDIUM,0.4123632280442441,0.41494529121769763,LOW,NONE,0.0103,PDF file (possible embedded scripts)
+manifest.json,MALICIOUS,LOW,0.4123632280442441,0.2649452912176976,LOW,NONE,0.0085,No issues detected

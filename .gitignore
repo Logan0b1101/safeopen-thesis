@@ -1,0 +1,16 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Runtime database
+safeopen_audit.db
+
+# OS / editor files
+.DS_Store
+*.swp
+
+# Logs
+*.log

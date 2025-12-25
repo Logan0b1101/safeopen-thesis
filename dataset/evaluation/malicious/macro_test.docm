@@ -1,0 +1,6 @@
+This is a synthetic DOCM container for testing.
+-----BEGIN-MACRO-----
+Sub AutoOpen()
+    MsgBox "SafeOpen test macro (harmless)"
+End Sub
+-----END-MACRO-----

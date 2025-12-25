@@ -1,0 +1,12 @@
+[
+  "time_s",
+  "has_test",
+  "has_phish",
+  "has_macro",
+  "has_js",
+  "name_len",
+  "ext_docm",
+  "ext_docx",
+  "ext_jpg",
+  "ext_pdf"
+]

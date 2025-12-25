@@ -1,0 +1,112 @@
+#!/usr/bin/env python3
+"""
+Unified Content Disarm & Reconstruction (CDR) Engine
+---------------------------------------------------
+
+This module provides a single entry-point: sanitize_file(path)
+
+It automatically detects:
+- PDF files
+- OOXML Office files (.docx, .docm, .pptx, .xlsx)
+- OLE Office files (.doc, .xls, .ppt)
+
+If detection fails → file is considered fake, malformed, or unsupported.
+"""
+
+import os
+from pathlib import Path
+import zipfile
+import olefile
+
+# Import the actual sanitizers
+from .pdf_cdr import sanitize_pdf
+from .office_cdr_ooxml import sanitize_ooxml
+from .office_cdr_ole import sanitize_ole
+
+
+# Directory where sanitized files are written
+SAFE_OUTPUT_DIR = Path("safe_outputs")
+SAFE_OUTPUT_DIR.mkdir(exist_ok=True)
+
+
+# --------------------------------------------------------
+# Helper: File type detection
+# --------------------------------------------------------
+
+def is_pdf(path: Path) -> bool:
+    return path.suffix.lower() == ".pdf"
+
+
+def is_ooxml(path: Path) -> bool:
+    """
+    OOXML = ZIP-based Office format (.docx, .docm, .pptx, .xlsx)
+    This checks ONLY if the file is a valid zip containing Office parts.
+    """
+    try:
+        with zipfile.ZipFile(path, "r") as z:
+            # Quick OOXML check
+            names = z.namelist()
+            return any(n.startswith("word/") or n.startswith("ppt/") or n.startswith("xl/") for n in names)
+    except Exception:
+        return False
+
+
+def is_ole(path: Path) -> bool:
+    try:
+        return olefile.isOleFile(str(path))
+    except Exception:
+        return False
+
+
+# --------------------------------------------------------
+# Main Unified CDR Function
+# --------------------------------------------------------
+
+def sanitize_file(file_path: str):
+    """
+    Main dispatcher for CDR.
+
+    Returns:
+        (success: bool, message: str)
+    """
+    path = Path(file_path)
+
+    if not path.exists():
+        return False, f"File not found: {file_path}"
+
+    # -----------------------------------
+    # 1. PDF Detection & CDR
+    # -----------------------------------
+    if is_pdf(path):
+        return sanitize_pdf(path)
+
+    # -----------------------------------
+    # 2. OOXML Detection (ZIP-based docx/docm/pptx/xlsx)
+    # -----------------------------------
+    if is_ooxml(path):
+        return sanitize_ooxml(path)
+
+    # -----------------------------------
+    # 3. OLE Detection (doc/xls/ppt)
+    # -----------------------------------
+    if is_ole(path):
+        return sanitize_ole(path)
+
+    # -----------------------------------
+    # 4. Not recognized → probably fake, polyglot, corrupted, or unsupported
+    # -----------------------------------
+    return False, "Unsupported, malformed, or fake Office/PDF file format"
+
+
+# --------------------------------------------------------
+# Optional: CLI test helper
+# --------------------------------------------------------
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) != 2:
+        print("Usage: python3 cdr_engine.py <file>")
+        exit(1)
+
+    ok, msg = sanitize_file(sys.argv[1])
+    print(ok, msg)

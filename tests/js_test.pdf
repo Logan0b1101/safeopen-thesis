@@ -1,0 +1,28 @@
+%PDF-1.3
+%¿÷¢þ
+1 0 obj
+<< /OpenAction << /JS (\(app.alert\("SafeOpen test: harmless embedded JavaScript executed."\);\)) /S (/JavaScript) >> /Pages 2 0 R /Type /Catalog >>
+endobj
+2 0 obj
+<< /Count 1 /Kids [ 3 0 R ] /Type /Pages >>
+endobj
+3 0 obj
+<< /Contents 4 0 R /MediaBox [ 0 0 595 842 ] /Parent 2 0 R /Resources << >> /Type /Page >>
+endobj
+4 0 obj
+<< /Length 0 /Filter /FlateDecode >>
+stream
+
+endstream
+endobj
+xref
+0 5
+0000000000 65535 f 
+0000000015 00000 n 
+0000000179 00000 n 
+0000000238 00000 n 
+0000000344 00000 n 
+trailer << /Root 1 0 R /Size 5 /ID [<171f944422dd6c65fc6e6c27005ce366><171f944422dd6c65fc6e6c27005ce366>] >>
+startxref
+414
+%%EOF

@@ -1,0 +1,36 @@
+{
+    "samples": [
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/malicious/js_embedded.pdf",
+            "size": 151
+        },
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/malicious/macro_test.docm",
+            "size": 157
+        },
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/malicious/mismatched_pdf_as_jpg.jpg",
+            "size": 60
+        },
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/malicious/phishing_invoice.pdf",
+            "size": 80
+        },
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/malicious/suspicious_nested.zip",
+            "size": 319
+        },
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/malicious/openaction_trigger.pdf",
+            "size": 123
+        },
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/malicious/polyglot_pdf_zip.pdf",
+            "size": 212
+        },
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/malicious/text_as_pdf.pdf",
+            "size": 50
+        }
+    ]
+}

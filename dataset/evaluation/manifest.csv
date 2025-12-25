@@ -1,0 +1,7 @@
+filename,label,reason
+clean_report.pdf,BENIGN,Standard PDF no active content
+resume.pdf,BENIGN,User document no scripts
+js_valid_embedded_final.pdf,MALICIOUS,Embedded JavaScript
+macro_test.docm,MALICIOUS,VBA macro
+polyglot_pdf_zip.pdf,MALICIOUS,Multiple file signatures
+

@@ -1,0 +1,3 @@
+# FullDocument
+
+This is a harmless test file for SafeOpen.

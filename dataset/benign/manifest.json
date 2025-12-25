@@ -1,0 +1,36 @@
+{
+    "benign_samples": [
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/benign/clean_report.pdf",
+            "size": 51
+        },
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/benign/resume.pdf",
+            "size": 66
+        },
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/benign/project_notes.docx",
+            "size": 52
+        },
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/benign/notes.txt",
+            "size": 31
+        },
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/benign/config.json",
+            "size": 46
+        },
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/benign/documents.zip",
+            "size": 272
+        },
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/benign/photo.jpg",
+            "size": 20
+        },
+        {
+            "path": "/home/kali/thesis/~safeopen/dataset/benign/multipage_clean.pdf",
+            "size": 46
+        }
+    ]
+}
