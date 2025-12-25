@@ -1,16 +1,17 @@
-# Virtual environment
-venv/
-
-# Python cache
+# Python
 __pycache__/
 *.pyc
+venv/
 
-# Runtime database
+# ML artifacts
+models/
+scaler/
+*.pkl
+
+# Runtime
 safeopen_audit.db
+results/
+logs/
 
-# OS / editor files
+# OS
 .DS_Store
-*.swp
-
-# Logs
-*.log
