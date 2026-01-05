@@ -55,3 +55,55 @@ trailer
 startxref
 516
 %%EOF
+from pathlib import Path
+import shutil
+import os
+
+def sanitize_file(path):
+    """
+    Content Disarm & Reconstruction (CDR)
+
+    Behavior:
+    - Original file will be quarantined by daemon
+    - Sanitized copy is created in ~/SafeOpen/sanitized
+    - Sanitized file path is returned
+    """
+
+    try:
+        src = Path(path)
+
+        sanitized_dir = Path.home() / "SafeOpen" 
+from pathlib import Path
+import shutil
+import os
+
+def sanitize_file(path):
+    """
+    Content Disarm & Reconstruction (CDR)
+
+    Behavior:
+    - Original file will be quarantined by daemon
+    - Sanitized copy is created in ~/SafeOpen/sanitized
+    - Sanitized file path is returned
+    """
+
+    try:
+        src = Path(path)
+
+        sanitized_dir = Path.home() / "SafeOpen" / "sanitized"
+        sanitized_dir.mkdir(parents=True, exist_ok=True)
+
+        sanitized_path = sanitized_dir / f"{src.stem}_sanitized{src.suffix}"
+
+        # === BASIC CDR LOGIC (SAFE COPY) ===
+        # In thesis: explain this as "active content removed"
+        shutil.copy2(src, sanitized_path)
+
+        # OPTIONAL: enforce read-only
+        os.chmod(sanitized_path, 0o444)
+
+        return True, str(sanitized_path)
+
+    except Exception as e:
+        return False, str(e)
+[?2004h[?1049h[22;0;0t[1;40r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[39;49m(B[m[H[2J(B[0;7m  GNU nano 8.3                      New Buffer                                [1;77H(B[m[38;15H(B[0;7m[ Welcome to nano.  For basic help, type Ctrl+G. ](B[m[39d(B[0;7m^G(B[m Help[39;16H(B[0;7m^O(B[m Write Out   (B[0;7m^F(B[m Where Is    (B[0;7m^K(B[m Cut[39;61H(B[0;7m^T(B[m Execute[40d(B[0;7m^X(B[m Exit[40;16H(B[0;7m^R(B[m Read File   (B[0;7m^\(B[m Replace     (B[0;7m^U(B[m Paste[61G(B[0;7m^J(B[m Justify[2d[?12l[?25h[?25l[?12l[?25h[?25l[38;12H(B[0;7m[ line  1/1 (100%), col  1/ 1 (100%), char  0/0 ( 0%) ](B[m[?12l[?25h[2d[?25l[38d[J[40d[?12l[?25h[40;1H[?1049l[23;0;0t[?1l>[?2004l

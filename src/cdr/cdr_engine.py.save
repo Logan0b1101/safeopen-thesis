@@ -25,11 +25,6 @@ from .office_cdr_ooxml import sanitize_ooxml
 from .office_cdr_ole import sanitize_ole
 
 
-SAFEOPEN_BASE = os.path.expanduser("~/SafeOpen")
-SANITIZED_DIR = os.path.join(SAFEOPEN_BASE, "sanitized")
-
-os.makedirs(SANITIZED_DIR, exist_ok=True)
-
 # Directory where sanitized files are written
 SAFE_OUTPUT_DIR = Path("safe_outputs")
 SAFE_OUTPUT_DIR.mkdir(exist_ok=True)
@@ -68,34 +63,42 @@ def is_ole(path: Path) -> bool:
 # Main Unified CDR Function
 # --------------------------------------------------------
 
-def sanitize_file(path):
+def sanitize_file(file_path: str):
     """
-    Content Disarm & Reconstruction (CDR)
-    For thesis/demo:
-    - Copies file
-    - Removes active content conceptually
-    - Outputs a new sanitized file path
+    Main dispatcher for CDR.
+
+    Returns:
+        (success: bool, message: str)
     """
+    path = Path(file_path)
 
-    try:
-        if not os.path.exists(path):
-            return False, "Original file not found"
+    if not path.exists():
+        return False, f"File not found: {file_path}"
 
-        filename = os.path.basename(path)
-        name, ext = os.path.splitext(filename)
+    # -----------------------------------
+    # 1. PDF Detection & CDR
+    # -----------------------------------
+    if is_pdf(path):
+        return sanitize_pdf(path)
 
-        sanitized_name = f"{name}_sanitized{ext}"
-        sanitized_path = os.path.join(SANITIZED_DIR, sanitized_name)
+    # -----------------------------------
+    # 2. OOXML Detection (ZIP-based docx/docm/pptx/xlsx)
+    # -----------------------------------
+    if is_ooxml(path):
+        return sanitize_ooxml(path)
 
-        shutil.copy2(path, sanitized_path)
+    # -----------------------------------
+    # 3. OLE Detection (doc/xls/ppt)
+    # -----------------------------------
+    if is_ole(path):
+        return sanitize_ole(path)
 
-        # Ensure readable permissions
-        os.chmod(sanitized_path, 0o644)
+    # -----------------------------------
+    # 4. Not recognized → probably fake, polyglot, corrupted, or unsupported
+    # -----------------------------------
+    return False, "Unsupported, malformed, or fake Office/PDF file format"
 
-        return True, sanitized_path
 
-    except Exception as e:
-        return False, str(e)
 # --------------------------------------------------------
 # Optional: CLI test helper
 # --------------------------------------------------------
@@ -107,3 +110,4 @@ if __name__ == "__main__":
         exit(1)
 
     ok, msg = sanitize_file(sys.argv[1])
+    print(ok, msg)

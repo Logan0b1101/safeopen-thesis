@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="refresh" content="2">
+
+    <title>SafeOpen Dashboard</title>
+</head>
+<body>
+    <h2>Welcome, {{ username }}</h2>
+    <h3>Daemon Status</h3>
+    <p>
+        SafeOpen Service:
+        <strong>{{ daemon_status }}</strong>
+    </p>
+
+    <h3>System Capabilities</h3>
+    <ul>
+        <li>Real-time filesystem monitoring</li>
+        <li>Hybrid static + ML detection</li>
+        <li>Content Disarm & Reconstruction</li>
+        <li>Sandbox execution</li>
+    </ul>
+    
+    <h3>Recent File Events</h3>
+
+   <table border="1" cellpadding="5">
+       <tr>
+          <th>Timestamp</th>
+          <th>File</th>
+          <th>Risk</th>
+          <th>Action</th>
+       </tr>
+       {% for e in events %}
+       <tr>
+          <td>{{ e[0] }}</td>
+          <td>{{ e[1] }}</td>
+          <td>{{ e[2] }}</td>
+          <td>{{ e[3] }}</td>
+       </tr>
+       {% endfor %}
+   </table>
+
+
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

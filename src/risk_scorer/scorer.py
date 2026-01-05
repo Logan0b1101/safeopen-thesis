@@ -68,7 +68,42 @@ def check_url_risk(url):
 # -------------------------
 # File Risk Analysis
 # -------------------------
-def check_file_risk(file_path):
+def check_file_risk(path):
+    try:
+        with open(path, "rb") as f:
+            data = f.read(200_000)
+
+        has_js = b"/JavaScript" in data or b"/JS" in data
+        has_openaction = b"/OpenAction" in data or b"/AA" in data
+        has_launch = b"/Launch" in data or b"/URI" in data
+        has_polyglot = b"PK\x03\x04" in data[:1024]
+
+        if has_openaction or has_launch or has_polyglot:
+            return "HIGH", "Auto-execution or polyglot detected"
+
+        if has_js:
+            return "MEDIUM", "Active content detected"
+
+        return "LOW", "No active content"
+
+    except Exception as e:
+        return "LOW", f"Error reading file: {e}"
+
+    # -------- PDF HIGH-RISK INDICATORS --------
+
+    if "/OpenAction" in text:
+        return "HIGH", "PDF OpenAction auto-execution detected"
+
+    if "/JavaScript" in text or "/JS" in text:
+        return "HIGH", "Embedded JavaScript detected"
+
+    if "/EmbeddedFile" in text:
+        return "HIGH", "Embedded file detected"
+
+    if "PK\x03\x04" in data.decode(errors="ignore"):
+        return "HIGH", "Polyglot PDF-ZIP detected"
+
+
     """Static analysis + YARA rules."""
     if not os.path.exists(file_path):
         return "HIGH", "File does not exist"
@@ -117,3 +152,4 @@ def check_file_risk(file_path):
         risk = "LOW"
 
     return risk, "; ".join(reasons) if reasons else "No issues detected"
+

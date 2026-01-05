@@ -1,1 +1,10 @@
+filename,label
+test_clean.pdf,BENIGN
+test_doc.docx,BENIGN
+test_invoice.pdf,BENIGN
+test_resume.pdf,BENIGN
+js_test.pdf,MALICIOUS
+macro_test.docm,MALICIOUS
+mime_mismatch.jpg,MALICIOUS
+phishing_fake_invoice.pdf,MALICIOUS
 

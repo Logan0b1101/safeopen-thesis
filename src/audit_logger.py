@@ -11,7 +11,9 @@ def log_event(
     final_score,
     final_label,
     action,
-    action_result
+    action_result,
+    latency
+
 ):
     ts = int(time.time())
 

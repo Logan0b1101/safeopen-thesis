@@ -42,3 +42,115 @@
 [2025-11-25 14:46:24] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/thesis/~safeopen/test_malicious.docm
 [2025-11-25 14:46:24] SANDBOX END: /home/kali/thesis/~safeopen/test_malicious.docm (exit OK)
 
+[2026-01-02 12:57:27] SANDBOX START: /home/kali/Downloads/js_valid_embedded_final.pdf
+[2026-01-02 12:57:27] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/js_valid_embedded_final.pdf
+[2026-01-02 12:57:27] SANDBOX END: /home/kali/Downloads/js_valid_embedded_final.pdf (exit OK)
+
+[2026-01-02 13:05:12] SANDBOX START: /home/kali/Downloads/js_valid_embedded_final.pdf
+[2026-01-02 13:05:12] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/js_valid_embedded_final.pdf
+[2026-01-02 13:05:12] SANDBOX END: /home/kali/Downloads/js_valid_embedded_final.pdf (exit OK)
+
+[2026-01-02 13:08:01] SANDBOX START: /home/kali/Downloads/js_valid_embedded_final.pdf
+[2026-01-02 13:08:01] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/js_valid_embedded_final.pdf
+[2026-01-02 13:08:01] SANDBOX END: /home/kali/Downloads/js_valid_embedded_final.pdf (exit OK)
+
+[2026-01-02 13:08:21] SANDBOX START: /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-02 13:08:21] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-02 13:08:21] SANDBOX END: /home/kali/Downloads/polyglot_pdf_zip.pdf (exit OK)
+
+[2026-01-02 13:09:12] SANDBOX START: /home/kali/Downloads/js_embedded_simplified.pdf
+[2026-01-02 13:09:12] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/js_embedded_simplified.pdf
+[2026-01-02 13:09:12] SANDBOX END: /home/kali/Downloads/js_embedded_simplified.pdf (exit OK)
+
+[2026-01-03 11:06:22] SANDBOX START: /home/kali/Downloads/openaction_highrisk.pdf
+[2026-01-03 11:06:22] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_highrisk.pdf
+[2026-01-03 11:06:22] SANDBOX END: /home/kali/Downloads/openaction_highrisk.pdf (exit OK)
+
+[2026-01-03 11:12:26] SANDBOX START: /home/kali/Downloads/js_valid_embedded_final.pdf
+[2026-01-03 11:12:26] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/js_valid_embedded_final.pdf
+[2026-01-03 11:12:26] SANDBOX END: /home/kali/Downloads/js_valid_embedded_final.pdf (exit OK)
+
+[2026-01-03 11:19:11] SANDBOX START: /home/kali/Downloads/js_embedded.pdf
+[2026-01-03 11:19:11] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/js_embedded.pdf
+[2026-01-03 11:19:11] SANDBOX END: /home/kali/Downloads/js_embedded.pdf (exit OK)
+
+[2026-01-03 11:25:34] SANDBOX START: /home/kali/Downloads/js_embedded.pdf
+[2026-01-03 11:25:34] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/js_embedded.pdf
+[2026-01-03 11:25:34] SANDBOX END: /home/kali/Downloads/js_embedded.pdf (exit OK)
+
+[2026-01-03 11:28:09] SANDBOX START: /home/kali/Downloads/js_embedded.pdf
+[2026-01-03 11:28:09] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/js_embedded.pdf
+[2026-01-03 11:28:09] SANDBOX END: /home/kali/Downloads/js_embedded.pdf (exit OK)
+
+[2026-01-03 11:36:27] SANDBOX START: /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-03 11:36:27] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-03 11:36:27] SANDBOX END: /home/kali/Downloads/openaction_trigger.pdf (exit OK)
+
+[2026-01-03 11:36:31] SANDBOX START: /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-03 11:36:31] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-03 11:36:31] SANDBOX END: /home/kali/Downloads/polyglot_pdf_zip.pdf (exit OK)
+
+[2026-01-03 22:58:35] SANDBOX START: /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-03 22:58:35] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-03 22:58:35] SANDBOX END: /home/kali/Downloads/openaction_trigger.pdf (exit OK)
+
+[2026-01-03 22:59:18] SANDBOX START: /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-03 22:59:18] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-03 22:59:18] SANDBOX END: /home/kali/Downloads/polyglot_pdf_zip.pdf (exit OK)
+
+[2026-01-03 23:21:00] SANDBOX START: /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-03 23:21:00] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-03 23:21:00] SANDBOX END: /home/kali/Downloads/openaction_trigger.pdf (exit OK)
+
+[2026-01-03 23:21:04] SANDBOX START: /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-03 23:21:04] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-03 23:21:04] SANDBOX END: /home/kali/Downloads/polyglot_pdf_zip.pdf (exit OK)
+
+[2026-01-03 23:26:15] SANDBOX START: /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-03 23:26:15] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-03 23:26:15] SANDBOX END: /home/kali/Downloads/openaction_trigger.pdf (exit OK)
+
+[2026-01-03 23:26:20] SANDBOX START: /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-03 23:26:20] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-03 23:26:20] SANDBOX END: /home/kali/Downloads/polyglot_pdf_zip.pdf (exit OK)
+
+[2026-01-03 23:41:51] SANDBOX START: /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-03 23:41:51] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-03 23:41:51] SANDBOX END: /home/kali/Downloads/openaction_trigger.pdf (exit OK)
+
+[2026-01-03 23:41:55] SANDBOX START: /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-03 23:41:55] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-03 23:41:55] SANDBOX END: /home/kali/Downloads/polyglot_pdf_zip.pdf (exit OK)
+
+[2026-01-03 23:51:26] SANDBOX START: /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-03 23:51:26] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-03 23:51:26] SANDBOX END: /home/kali/Downloads/openaction_trigger.pdf (exit OK)
+
+[2026-01-03 23:51:33] SANDBOX START: /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-03 23:51:33] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-03 23:51:33] SANDBOX END: /home/kali/Downloads/polyglot_pdf_zip.pdf (exit OK)
+
+[2026-01-03 23:53:08] SANDBOX START: /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-03 23:53:08] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-03 23:53:08] SANDBOX END: /home/kali/Downloads/openaction_trigger.pdf (exit OK)
+
+[2026-01-03 23:53:13] SANDBOX START: /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-03 23:53:13] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-03 23:53:13] SANDBOX END: /home/kali/Downloads/polyglot_pdf_zip.pdf (exit OK)
+
+[2026-01-04 10:56:00] SANDBOX START: /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-04 10:56:00] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-04 10:56:00] SANDBOX END: /home/kali/Downloads/openaction_trigger.pdf (exit OK)
+
+[2026-01-04 10:56:17] SANDBOX START: /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-04 10:56:17] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/polyglot_pdf_zip.pdf
+[2026-01-04 10:56:17] SANDBOX END: /home/kali/Downloads/polyglot_pdf_zip.pdf (exit OK)
+
+[2026-01-05 18:56:27] SANDBOX START: /home/kali/Downloads/js_valid_embedded.pdf
+[2026-01-05 18:56:27] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/js_valid_embedded.pdf
+[2026-01-05 18:56:27] SANDBOX END: /home/kali/Downloads/js_valid_embedded.pdf (exit OK)
+
+[2026-01-05 18:57:38] SANDBOX START: /home/kali/Downloads/obfuscated_super_malicious.pdf
+[2026-01-05 18:57:38] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/obfuscated_super_malicious.pdf
+[2026-01-05 18:57:38] SANDBOX END: /home/kali/Downloads/obfuscated_super_malicious.pdf (exit OK)
+
