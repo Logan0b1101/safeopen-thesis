@@ -69,23 +69,6 @@ sudo apt install firejail sqlite3 python3-venv
 
 ### Python Dependencies
 
-Install using pip:
-
-```bash
-pip install -r requirements.txt
-```
-
-If `requirements.txt` does not exist, create it with:
-
-```
-watchdog
-PyPDF2
-scikit-learn
-numpy
-```
-
----
-
 ## 5. Installation
 
 Clone repository:
