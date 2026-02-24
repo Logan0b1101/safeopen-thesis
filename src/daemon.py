@@ -24,11 +24,12 @@ from src.audit_logger import log_event
 from src.utils.audit import init_db
 from src.utils.pdf_inspector import extract_pdf_indicators
 from src.utils.pdf_indicators import extract_pdf_indicators
+from src.analysis.explainability import analyze_pdf_explainability
 
 # ---------------- CONFIG ----------------
 
 WATCH_DIRS = [
-    str(Path.home() / "Downloads")
+   str(Path.home() / "Downloads")
 ]
 
 MIN_FILE_SIZE_BYTES = 32
@@ -37,165 +38,170 @@ DEBOUNCE_SEC = 1.0
 # ---------------- ML INIT ----------------
 
 try:
-    ml = MLScorer()
-    print("[daemon] MLScorer loaded")
+   ml = MLScorer()
+   print("[daemon] MLScorer loaded")
 except Exception as e:
-    ml = None
-    print("[daemon] MLScorer unavailable:", e)
+   ml = None
+   print("[daemon] MLScorer unavailable:", e)
 
 # ---------------- HANDLER ----------------
 
 class ScanHandler(FileSystemEventHandler):
-    def __init__(self):
-        super().__init__()
-        self.seen = set()
+   def __init__(self):
+       super().__init__()
+       self.seen = set()
 
-    def on_created(self, event):
-        self._handle_event(event)
+   def on_created(self, event):
+       self._handle_event(event)
 
-    def on_modified(self, event):
-        self._handle_event(event)
+   def on_modified(self, event):
+       self._handle_event(event)
 
-    def _handle_event(self, event):
-        if event.is_directory:
-            return
+   def _handle_event(self, event):
+       if event.is_directory:
+           return
 
-        path = event.src_path
+       path = event.src_path
 
-        # Ignore temp / lock files
-        if os.path.basename(path).startswith("."):
-            return
+       # Ignore temp / lock files
+       if os.path.basename(path).startswith("."):
+           return
 
-        # Deduplicate events
-        if path in self.seen:
-            return
+       # Deduplicate events
+       if path in self.seen:
+           return
 
-        time.sleep(DEBOUNCE_SEC)
+       time.sleep(DEBOUNCE_SEC)
 
-        if not os.path.exists(path):
-            return
+       if not os.path.exists(path):
+           return
 
-        if os.path.getsize(path) < MIN_FILE_SIZE_BYTES:
-            return
+       if os.path.getsize(path) < MIN_FILE_SIZE_BYTES:
+           return
 
-        self.seen.add(path)
-        print("[daemon] Scanning:", path)
-        self.scan_file(path)
+       self.seen.add(path)
+       print("[daemon] Scanning:", path)
+       self.scan_file(path)
 
-    def scan_file(self, path):
-        start_time = time.time()
+#--------scan file handler-----------#
 
-        try:
-            # ---------------- Static Analysis ----------------
-            static_label, static_reason = check_file_risk(path)
+   def scan_file(self, path):
+    start_time = time.time()
 
-            # ---------------- ML Analysis ----------------
-            ml_prob = 0.0
-            if ml:
-                features = extract_features_for_ml(path)
-                ml_prob, _ = ml.predict(features)
+    try:
+        # ---------------- Static Analysis ----------------
+        static_label, static_reason = check_file_risk(path)
 
-            # ---------------- Indicator Escalation ----------------
-            indicators = []
+        # ---------------- Explainability Analysis (PDF) ----------------
+        indicators = []
+        explain_reason = ""
+        explain_score = 0.0
 
-            if path.lower().endswith(".pdf"):
-                indicators = extract_pdf_indicators(path)
-            
-            # HARD ESCALATION RULE (STRUCTURAL EXECUTION)
-            escalated = False
+        if path.lower().endswith(".pdf"):
+            indicators, explain_reason, explain_score = analyze_pdf_explainability(path)
 
-            if indicators:
-                if "Auto-execution OpenAction" in indicators:
-                    escalated = True
-                if "Embedded JavaScript" in indicators:
-                    escalated = True
+        if explain_reason:
+            static_reason = f"{static_reason} | {explain_reason}"
+
+        # ---------------- ML Analysis ----------------
+        ml_prob = 0.0
+        if ml:
+            features = extract_features_for_ml(path)
+            ml_prob, _ = ml.predict(features)
+
+        # ---------------- Indicator Escalation ----------------
+        escalated = False
+
+        if indicators:
+            if "Auto-execution OpenAction" in indicators:
+                escalated = True
+            elif "Embedded JavaScript" in indicators:
+                escalated = True
 
             static_reason += " | Indicators: " + ", ".join(indicators)
 
-            # ---------------- Score Fusion ----------------
-            static_map = {"LOW": 0.2, "MEDIUM": 0.5, "HIGH": 0.9}
-            static_score = static_map.get(static_label, 0.5)
+        # ---------------- Score Fusion ----------------
+        static_map = {"LOW": 0.2, "MEDIUM": 0.5, "HIGH": 0.9}
+        static_score = static_map.get(static_label, 0.5)
 
-            final_score = (0.5 * static_score) + (0.4 * ml_prob)
-            final_score = min(final_score, 1.0)
+        final_score = (0.4 * static_score + 0.4 * ml_prob + 0.2 * explain_score)
+        final_score = min(final_score, 1.0)
 
-            # ---------------- Decision Logic ----------------
-            if escalated:
-                final_label = "HIGH"
-                action = "SANDBOX"
-                static_reason += " | Indicators: " + ", ".join(indicators)
+        # ---------------- Decision Logic ----------------
+        action_result = "NONE"
+
+        if escalated:
+            final_label = "HIGH"
+            action = "SANDBOX"
+            action_result = "Structural execution indicators detected"
+
+        elif final_score >= 0.65:
+            final_label = "HIGH"
+            action = "SANDBOX"
+            action_result = "High composite risk score"
+
+        elif final_score >= 0.40:
+            final_label = "MEDIUM"
+            action = "CDR"
+            ok, result = sanitize_file(path)
+            if ok:
+                action_result = f"Sanitized → {result}"
             else:
-                if escalated:
-                    final_label = "HIGH"
-                    action = "SANDBOX"
-                elif final_score >= 0.65:
-                    final_label = "HIGH"
-                    action = "SANDBOX"
-                elif final_score >= 0.40:
-                    final_label = "MEDIUM"
-                    action = "CDR"
-                else:
-                    final_label = "LOW"
-                    action = "NONE"
-            # ---------------- Response ----------------
-            action_result = ""
+                action_result = f"CDR failed: {result}"
 
-            if action == "SANDBOX":
-                ok, msg = open_in_sandbox(path)
-                action_result = msg
+        else:
+            final_label = "LOW"
+            action = "NONE"
+            action_result = "No active content detected"
 
-            elif action == "CDR":
-                ok, result = sanitize_file(path)
-                action_result = f"Sanitized → {result}" if ok else f"CDR failed: {result}"
+        latency = time.time() - start_time
 
-            latency = round(time.time() - start_time, 4)
+        log_event(
+            file_path=path,
+            static_label=static_label,
+            static_reason=static_reason,
+            ml_prob=ml_prob,
+            final_score=final_score,
+            final_label=final_label,
+            action=action,
+            action_result=action_result,
+            latency=float(latency)
+        )
 
-            # ---------------- Audit Log ----------------
-            log_event(
-                file_path=path,
-                static_label=static_label,
-                static_reason=static_reason,
-                ml_prob=float(ml_prob),
-                final_score=float(final_score),
-                final_label=final_label,
-                action=action,
-                action_result=action_result,
-                latency=float(latency)
-            )
+        print(f"[daemon] {path} → {final_label} ({action})")
+        print(f"Reason: {static_reason}")
 
-            print(f"[daemon] {path} → {final_label} ({action})")
-
-        except Exception:
-            print("[daemon] ERROR scanning:", path)
-            traceback.print_exc()
-
+    except Exception:
+        print(f"[daemon] ERROR scanning: {path}")
+        traceback.print_exc()
 # ---------------- WATCHER ----------------
 
 def start_watcher():
-    observer = Observer()
-    handler = ScanHandler()
+   observer = Observer()
+   handler = ScanHandler()
 
-    print("[daemon] HOME =", Path.home())
-    print("[daemon] WATCH_DIRS =", WATCH_DIRS)
+   print("[daemon] HOME =", Path.home())
+   print("[daemon] WATCH_DIRS =", WATCH_DIRS)
 
-    for d in WATCH_DIRS:
-        if os.path.exists(d):
-            observer.schedule(handler, d, recursive=True)
-            print("[daemon] Watching:", d)
-        else:
-            print("[daemon] WARNING: Missing directory:", d)
+   for d in WATCH_DIRS:
+       if os.path.exists(d):
+           observer.schedule(handler, d, recursive=True)
+           print("[daemon] Watching:", d)
+       else:
+           print("[daemon] WARNING: Missing directory:", d)
 
-    observer.start()
+   observer.start()
 
-    try:
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        observer.stop()
+   try:
+       while True:
+           time.sleep(1)
+   except KeyboardInterrupt:
+       observer.stop()
 
-    observer.join()
+   observer.join()
+
 
 # ---------------- MAIN ----------------
 
 if __name__ == "__main__":
-    start_watcher()
+   start_watcher()

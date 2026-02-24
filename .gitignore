@@ -1,7 +1,13 @@
 # Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+*.log
 venv/
+.env/
+
+.db
 
 # ML artifacts
 models/
@@ -10,6 +16,8 @@ scaler/
 
 # Runtime
 safeopen_audit.db
+sanitized/
+safe_outputs/
 results/
 logs/
 

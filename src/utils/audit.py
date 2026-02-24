@@ -1,8 +1,9 @@
+# src/utils/audit.py
 import sqlite3
 import time
-from pathlib import Path
+import os
 
-DB_PATH = Path("safeopen_audit.db")
+DB_PATH = "safeopen_audit.db"
 
 def init_db():
     conn = sqlite3.connect(DB_PATH)
@@ -10,10 +11,10 @@ def init_db():
 
     cur.execute("""
     CREATE TABLE IF NOT EXISTS events (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
         ts INTEGER,
         file_path TEXT,
         static_label TEXT,
+        static_reason TEXT,
         ml_prob REAL,
         final_score REAL,
         final_label TEXT,
@@ -26,10 +27,10 @@ def init_db():
     conn.commit()
     conn.close()
 
-
 def log_event(
     file_path,
     static_label,
+    static_reason,
     ml_prob,
     final_score,
     final_label,
@@ -37,20 +38,18 @@ def log_event(
     action_result,
     latency
 ):
+    init_db()
+
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
     cur.execute("""
-    INSERT INTO events (
-        ts, file_path, static_label, ml_prob,
-        final_score, final_label, action,
-        action_result, latency
-    )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO events VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         int(time.time()),
         file_path,
         static_label,
+        static_reason,
         float(ml_prob),
         float(final_score),
         final_label,

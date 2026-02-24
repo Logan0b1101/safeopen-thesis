@@ -1,109 +1,31 @@
-#!/usr/bin/env python3
-"""
-Unified Content Disarm & Reconstruction (CDR) Engine
----------------------------------------------------
-
-This module provides a single entry-point: sanitize_file(path)
-
-It automatically detects:
-- PDF files
-- OOXML Office files (.docx, .docm, .pptx, .xlsx)
-- OLE Office files (.doc, .xls, .ppt)
-
-If detection fails → file is considered fake, malformed, or unsupported.
-"""
+# src/cdr/cdr_engine.py
 
 import os
 from pathlib import Path
-import zipfile
-import olefile
-import shutil
-
-# Import the actual sanitizers
-from .pdf_cdr import sanitize_pdf
-from .office_cdr_ooxml import sanitize_ooxml
-from .office_cdr_ole import sanitize_ole
-
-
-SAFEOPEN_BASE = os.path.expanduser("~/SafeOpen")
-SANITIZED_DIR = os.path.join(SAFEOPEN_BASE, "sanitized")
-
-os.makedirs(SANITIZED_DIR, exist_ok=True)
-
-# Directory where sanitized files are written
-SAFE_OUTPUT_DIR = Path("safe_outputs")
-SAFE_OUTPUT_DIR.mkdir(exist_ok=True)
-
-
-# --------------------------------------------------------
-# Helper: File type detection
-# --------------------------------------------------------
-
-def is_pdf(path: Path) -> bool:
-    return path.suffix.lower() == ".pdf"
-
-
-def is_ooxml(path: Path) -> bool:
-    """
-    OOXML = ZIP-based Office format (.docx, .docm, .pptx, .xlsx)
-    This checks ONLY if the file is a valid zip containing Office parts.
-    """
-    try:
-        with zipfile.ZipFile(path, "r") as z:
-            # Quick OOXML check
-            names = z.namelist()
-            return any(n.startswith("word/") or n.startswith("ppt/") or n.startswith("xl/") for n in names)
-    except Exception:
-        return False
-
-
-def is_ole(path: Path) -> bool:
-    try:
-        return olefile.isOleFile(str(path))
-    except Exception:
-        return False
-
-
-# --------------------------------------------------------
-# Main Unified CDR Function
-# --------------------------------------------------------
+import PyPDF2
 
 def sanitize_file(path):
-    """
-    Content Disarm & Reconstruction (CDR)
-    For thesis/demo:
-    - Copies file
-    - Removes active content conceptually
-    - Outputs a new sanitized file path
-    """
+    path = Path(path)
+
+    if path.suffix.lower() != ".pdf":
+        return False, "Unsupported format for CDR"
 
     try:
-        if not os.path.exists(path):
-            return False, "Original file not found"
+        output_dir = Path("safe_outputs")
+        output_dir.mkdir(exist_ok=True)
 
-        filename = os.path.basename(path)
-        name, ext = os.path.splitext(filename)
+        sanitized_path = output_dir / f"{path.stem}_sanitized.pdf"
 
-        sanitized_name = f"{name}_sanitized{ext}"
-        sanitized_path = os.path.join(SANITIZED_DIR, sanitized_name)
+        reader = PyPDF2.PdfReader(str(path))
+        writer = PyPDF2.PdfWriter()
 
-        shutil.copy2(path, sanitized_path)
+        for page in reader.pages:
+            writer.add_page(page)
 
-        # Ensure readable permissions
-        os.chmod(sanitized_path, 0o644)
+        with open(sanitized_path, "wb") as f:
+            writer.write(f)
 
-        return True, sanitized_path
+        return True, str(sanitized_path)
 
     except Exception as e:
-        return False, str(e)
-# --------------------------------------------------------
-# Optional: CLI test helper
-# --------------------------------------------------------
-
-if __name__ == "__main__":
-    import sys
-    if len(sys.argv) != 2:
-        print("Usage: python3 cdr_engine.py <file>")
-        exit(1)
-
-    ok, msg = sanitize_file(sys.argv[1])
+        return False, f"CDR error: {e}"

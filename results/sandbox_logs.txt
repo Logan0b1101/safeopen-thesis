@@ -154,3 +154,47 @@
 [2026-01-05 18:57:38] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/obfuscated_super_malicious.pdf
 [2026-01-05 18:57:38] SANDBOX END: /home/kali/Downloads/obfuscated_super_malicious.pdf (exit OK)
 
+[2026-01-05 22:42:57] SANDBOX START: /home/kali/Downloads/js_embedded.pdf
+[2026-01-05 22:42:57] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/js_embedded.pdf
+[2026-01-05 22:42:57] SANDBOX END: /home/kali/Downloads/js_embedded.pdf (exit OK)
+
+[2026-01-05 22:45:44] SANDBOX START: /home/kali/Downloads/js_embedded.pdf
+[2026-01-05 22:45:44] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/js_embedded.pdf
+[2026-01-05 22:45:44] SANDBOX END: /home/kali/Downloads/js_embedded.pdf (exit OK)
+
+[2026-01-05 22:46:20] SANDBOX START: /home/kali/Downloads/openaction_super_malicious.pdf
+[2026-01-05 22:46:20] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_super_malicious.pdf
+[2026-01-05 22:46:20] SANDBOX END: /home/kali/Downloads/openaction_super_malicious.pdf (exit OK)
+
+[2026-01-08 21:32:59] SANDBOX START: /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-08 21:32:59] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-08 21:32:59] SANDBOX END: /home/kali/Downloads/openaction_trigger.pdf (exit OK)
+
+[2026-01-08 21:37:46] SANDBOX START: /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-08 21:37:46] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-08 21:37:46] SANDBOX END: /home/kali/Downloads/openaction_trigger.pdf (exit OK)
+
+[2026-01-08 21:38:14] SANDBOX START: /home/kali/Downloads/js_test.pdf
+[2026-01-08 21:38:14] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/js_test.pdf
+[2026-01-08 21:38:14] SANDBOX END: /home/kali/Downloads/js_test.pdf (exit OK)
+
+[2026-01-08 22:30:27] SANDBOX START: /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-08 22:30:27] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-08 22:30:27] SANDBOX END: /home/kali/Downloads/openaction_trigger.pdf (exit OK)
+
+[2026-01-08 22:37:33] SANDBOX START: /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-08 22:37:33] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-08 22:37:33] SANDBOX END: /home/kali/Downloads/openaction_trigger.pdf (exit OK)
+
+[2026-01-09 00:00:05] SANDBOX START: /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-09 00:00:05] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_trigger.pdf
+[2026-01-09 00:00:05] SANDBOX END: /home/kali/Downloads/openaction_trigger.pdf (exit OK)
+
+[2026-01-09 00:01:01] SANDBOX START: /home/kali/Downloads/js_embedded.pdf
+[2026-01-09 00:01:01] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/js_embedded.pdf
+[2026-01-09 00:01:01] SANDBOX END: /home/kali/Downloads/js_embedded.pdf (exit OK)
+
+[2026-01-09 00:02:16] SANDBOX START: /home/kali/Downloads/openaction_highrisk.pdf
+[2026-01-09 00:02:16] CMD: firejail --quiet --private --net=none --caps.drop=all libreoffice --norestore --nolockcheck /home/kali/Downloads/openaction_highrisk.pdf
+[2026-01-09 00:02:16] SANDBOX END: /home/kali/Downloads/openaction_highrisk.pdf (exit OK)
+

@@ -152,4 +152,3 @@ def check_file_risk(path):
         risk = "LOW"
 
     return risk, "; ".join(reasons) if reasons else "No issues detected"
-

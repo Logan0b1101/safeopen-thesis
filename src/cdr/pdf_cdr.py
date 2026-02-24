@@ -1,6 +1,8 @@
 from PyPDF2 import PdfReader, PdfWriter
 from PyPDF2.generic import DictionaryObject, NameObject, ArrayObject
 from pathlib import Path
+import pikepdf
+import os
 
 SAFE_OUTPUT_DIR = Path("safe_outputs")
 SAFE_OUTPUT_DIR.mkdir(exist_ok=True)
@@ -25,56 +27,30 @@ def _get_dict(obj):
         return obj
 
 
-def sanitize_pdf(pdf_path: str):
+def sanitize_pdf(input_path):
     try:
-        pdf_path = Path(pdf_path)
-        reader = PdfReader(str(pdf_path))
-        writer = PdfWriter()
+        output_dir = os.path.join(os.getcwd(), "safe_outputs")
+        os.makedirs(output_dir, exist_ok=True)
 
-        # ------- Get /Root -------
-        root = reader.trailer.get("/Root", {})
-        root = _get_dict(root)
+        output_path = os.path.join(
+            output_dir,
+            os.path.basename(input_path).replace(".pdf", "_sanitized.pdf")
+        )
 
-        # ------- Remove JavaScript -------
-        names = root.get("/Names")
-        names = _get_dict(names)
+        with pikepdf.open(input_path) as pdf:
+            # Remove JavaScript
+            if "/Names" in pdf.Root:
+                pdf.Root.pop("/Names", None)
 
-        if isinstance(names, dict):
-            js = names.get("/JavaScript")
-            if js:
-                _safe_del(names, NameObject("/JavaScript"))
+            # Remove OpenAction
+            pdf.Root.pop("/OpenAction", None)
 
-            embedded = names.get("/EmbeddedFiles")
-            if embedded:
-                _safe_del(names, NameObject("/EmbeddedFiles"))
+            # Remove embedded files
+            pdf.Root.pop("/EmbeddedFiles", None)
 
-        # ------- Remove OpenAction & AA -------
-        _safe_del(root, NameObject("/OpenAction"))
-        _safe_del(root, NameObject("/AA"))
+            pdf.save(output_path)
 
-        # ------- Process pages -------
-        for page in reader.pages:
-            page_obj = _get_dict(page)
-
-            # Remove annotations
-            if "/Annots" in page_obj:
-                try:
-                    page_obj[NameObject("/Annots")] = ArrayObject()
-                except Exception:
-                    pass
-
-            writer.add_page(page_obj)
-
-        # ------- Copy metadata safely -------
-        if "/Metadata" in root:
-            _safe_del(root, NameObject("/Metadata"))
-
-        # ------- Write output -------
-        output_path = SAFE_OUTPUT_DIR / f"sanitized_{pdf_path.name}"
-        with open(output_path, "wb") as f:
-            writer.write(f)
-
-        return True, f"PDF sanitized → {output_path}"
+        return True, output_path
 
     except Exception as e:
-        return False, f"PDF sanitization failed: {e}"
+        return False, str(e)
